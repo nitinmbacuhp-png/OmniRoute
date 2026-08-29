@@ -1,0 +1,102 @@
+{
+  "project": "GLOBAL STUDY OS",
+  "repository": "nitinmbacuhp-png/OmniRoute",
+  "branch": "codex/global-study-os",
+  "mode": "autonomous_agent_loop",
+  "mission": "Transform OmniRoute into a production-grade multi-tenant B2B study-abroad application operating system while preserving existing OmniRoute functionality.",
+  "execution_loop": ["INSPECT","MAP_ARCHITECTURE","PLAN","IMPLEMENT","TEST","DEBUG","SECURITY_REVIEW","BUILD","RETEST","CONTINUE"],
+  "do_not_stop_at": ["plan","documentation","database-only","UI-only","prototype"],
+  "product": {
+    "positioning": "AI Operating System for Global Student Recruitment",
+    "surfaces": ["Partner Portal","Partner Dashboard","Branch Management","Counsellor Management","Student 360","Student Digital Twin","Document Intelligence","Course Finder","University Finder","AI Match Engine","Eligibility Engine","Shortlist Workspace","Application CRM","Application Control Tower","Document Checklist","Offer Management","Deposit Tracking","Visa/Enrolment Workflow","Commission Ledger","Partner Analytics","University Admin","Platform Super Admin","AI Command Center","Notification Center","Audit Center","Integration Center","Billing","System Health"]
+  },
+  "roles": ["PLATFORM_SUPER_ADMIN","PLATFORM_OPERATIONS","UNIVERSITY_ADMIN","PARTNER_OWNER","PARTNER_ADMIN","BRANCH_MANAGER","COUNSELLOR","APPLICATION_OFFICER","FINANCE","READ_ONLY","STUDENT"],
+  "multi_tenancy": {
+    "required": true,
+    "hierarchy": ["PLATFORM","PARTNER_ORGANIZATION","BRANCH","COUNSELLOR","STUDENT","APPLICATION"],
+    "requirements": ["server-side tenant isolation","RBAC/ABAC","ownership checks","least privilege","IDOR protection","cross-tenant read/write/document protection","authorization tests"]
+  },
+  "student_digital_twin": {
+    "identity": ["name","DOB","nationality","residence","passport","email","phone"],
+    "academics": ["10th","12th","diploma","bachelor","master","subjects","percentage","GPA","grading system","graduation dates","backlogs","repeats","study gaps"],
+    "english": ["IELTS","PTE","TOEFL","Duolingo","other tests","overall","components","test date","expiry"],
+    "other_tests": ["GRE","GMAT","SAT","ACT"],
+    "employment": ["employer","role","start","end","experience","responsibilities"],
+    "financial": ["tuition budget","living budget","funding","sponsor","loan","available funds","currency"],
+    "preferences": ["destination","city","intake","level","discipline","course","duration","budget","ranking","institution type","post-study work","career goal"],
+    "immigration": ["previous refusals","previous applications","travel history","visa history","study gaps","dependants","constraints"]
+  },
+  "document_intelligence": {
+    "formats": ["PDF","JPG","PNG","DOC","DOCX"],
+    "pipeline": ["UPLOAD","VALIDATE","SECURITY_CHECK","OCR","CLASSIFY","EXTRACT","CONFIDENCE","DUPLICATE_CHECK","EXPIRY_CHECK","CROSS_DOCUMENT_CHECK","ANOMALY_CHECK","HUMAN_REVIEW"],
+    "rules": ["AI extraction never silently overwrites verified data","low-confidence critical fields require review","private storage","short-lived signed access","untrusted filenames"]
+  },
+  "eligibility_engine": {
+    "type": "deterministic",
+    "statuses": ["ELIGIBLE","CONDITIONALLY_ELIGIBLE","NOT_ELIGIBLE","UNKNOWN_REQUIRES_REVIEW"],
+    "rules": ["academic minimum","percentage/GPA","subject prerequisites","English","tests","work experience","age where applicable","study gap","intake","country","deadline","tuition","deposit","campus","delivery mode"],
+    "audit": ["rule_id","evidence","source","source_date","engine_version"]
+  },
+  "ai_matching": {
+    "role": "ranking_and_explanation_over_verified_structured_data",
+    "scores": ["academic_fit","english_fit","budget_fit","career_fit","intake_fit","destination_fit","scholarship_fit","application_complexity","risk","overall_fit"],
+    "categories": ["GREEN_STRONG_MATCH","BLUE_TARGET","AMBER_CONDITIONAL","RED_WEAK_OR_RISKY"],
+    "rules": ["never fabricate requirements/fees/deadlines","mark unknown authoritative data DATA_UNVERIFIED","commission never silently overrides academic suitability"]
+  },
+  "course_finder": {
+    "filters": ["country","state/province","city","university","campus","program","discipline","level","intake","duration","tuition","application fee","deposit","scholarship","English","academic requirement","work experience","delivery mode","ranking","institution type","post-study work","partner availability"],
+    "search": ["keyword","faceted","structured","semantic","natural language","hybrid"]
+  },
+  "shortlist": {
+    "portfolios": ["TOP_5","TOP_10","SAFE","TARGET","AMBITIOUS","BACKUP"],
+    "controls": ["compare","approve","remove","share","apply","manual override"],
+    "must_show": ["university","course","campus","intake","duration","tuition","application fee","eligibility","match score","risk","reasons","missing requirements","deadline","next action"]
+  },
+  "application_crm": {
+    "states": ["LEAD","PROFILE_CREATED","DOCUMENTS_PENDING","PROFILE_VERIFIED","SHORTLISTED","APPLICATION_READY","SUBMISSION_PENDING","SUBMITTED","UNDER_REVIEW","CONDITIONAL_OFFER","UNCONDITIONAL_OFFER","DEPOSIT_PENDING","DEPOSIT_PAID","CAS_LOA_COE_PENDING","CAS_LOA_COE_RECEIVED","VISA_PREPARATION","VISA_SUBMITTED","VISA_DECISION","ENROLLED","WITHDRAWN","REJECTED"],
+    "requirements": ["explicit state machine","validated transitions","timeline","audit event for every transition","tasks","deadlines"]
+  },
+  "application_preflight": {
+    "minimum_checks": 150,
+    "categories": ["identity","passport","academics","English","course","campus","intake","fees","deadlines","documents","document consistency","financial information","application answers","institution-specific requirements","visa-sensitive consistency"],
+    "results": ["PASS","WARNING","BLOCKER"],
+    "rule": "BLOCKER prevents automated submission"
+  },
+  "submission_automation": {
+    "interfaces": ["ApplicationConnector","InstitutionConnector","PortalConnector","DocumentConnector","NotificationConnector","PaymentConnector"],
+    "routes": ["DIRECT_API","PARTNER_API","PARTNER_FEED","EMAIL","MANUAL","SIMULATION"],
+    "rules": ["real integrations only when actually available and authorized","human approval before irreversible submission by default","never bypass CAPTCHA/MFA/authentication/anti-bot/access controls","unsupported institutions use manual or simulation workflows"]
+  },
+  "ai_command_center": {
+    "requires": "tool calling over authorized platform data",
+    "examples": ["eligible students by intake","incomplete applications","deadline risk","build shortlist","compare universities","partner performance","missing documents","prepare application","run preflight","today's critical actions"]
+  },
+  "university_data": {
+    "entities": ["University","Campus","Faculty","Discipline","Program","Intake","Requirement","Fee","Scholarship","Deadline","ApplicationMethod","PartnerAvailability","Country","City"],
+    "provenance": ["source","source_url","verified_at","verification_status","effective_from","effective_to","last_updated"],
+    "source_priority": ["official institution","official government","authorized feed/API","verified internal","secondary"]
+  },
+  "commission_engine": {
+    "dimensions": ["university","program","country","intake","partner","branch","counsellor"],
+    "types": ["percentage","fixed","tiered","bonus"],
+    "ledger": ["expected","reported","received","variance","payment status","expected date","received date"]
+  },
+  "automation_engine": {
+    "events": ["StudentCreated","DocumentUploaded","DocumentVerified","EligibilityCompleted","ShortlistGenerated","ApplicationCreated","ApplicationApproved","ApplicationSubmitted","OfferReceived","DeadlineApproaching","CommissionReceived"],
+    "actions": ["CreateTask","SendNotification","RunEligibility","GenerateShortlist","RunPreflight","QueueSubmission","UpdateStatus"],
+    "requirements": ["permissions","conditions","execution history","retry policy","failure state","audit"]
+  },
+  "analytics": ["leads","students","applications","offers","deposits","enrolments","conversion","processing time","document completion","submission success","revenue","commission","counsellor performance","university performance","country performance","course performance"],
+  "ai_governance": ["provider","model","prompt version","input snapshot/hash where safe","output","confidence","timestamp","human override","final decision"],
+  "database_entities": ["organizations","users","roles","permissions","branches","students","student_academics","student_tests","student_preferences","documents","document_extractions","document_conflicts","universities","campuses","programs","intakes","requirements","english_requirements","fees","deadlines","scholarships","shortlists","shortlist_items","applications","application_documents","application_events","application_tasks","submission_jobs","submission_attempts","offers","deposits","visa_cases","commissions","commission_ledger","notifications","audit_logs","ai_runs","ai_feedback","integrations","automation_jobs","automation_runs","subscriptions","billing"],
+  "provider_abstraction": ["AIProvider","GeminiProvider","OpenAIProvider","AnthropicProvider"],
+  "security": ["tenant isolation","RBAC/ABAC","server authorization","secure sessions","rate limiting","input validation","secure file handling","signed URLs","secret management","audit logs","PII minimization","PII access logging","retention","export/delete","backup strategy","prompt injection defense","tool least privilege"],
+  "design": {"style":"premium enterprise SaaS","requirements":["responsive","accessible","keyboard friendly","light/dark mode","high information density","fast interactions","clear hierarchy"]},
+  "testing": ["unit","integration","API","authorization","tenant isolation","eligibility","AI contracts","document pipeline","application lifecycle","preflight","automation","end-to-end"],
+  "mandatory_assertions": ["Tenant A cannot access Tenant B","unauthorized roles cannot access restricted records","eligibility is deterministic","BLOCKER prevents submission","configured irreversible submissions require approval","AI cannot bypass eligibility","secrets never reach frontend","duplicate submission is prevented"],
+  "ci": ["lint","typecheck","tests","security checks","production build"],
+  "documentation": ["AGENTS.md","README",".env.example","architecture docs","deployment docs","security checklist","integration docs"],
+  "vertical_slice": ["login","partner organization","counsellor","student","document upload","document extraction/review","eligibility","course search","AI shortlist","comparison","application draft","preflight","blocker resolution","human approval","simulation or authorized submission","confirmation","timeline","tasks","deadlines","analytics"],
+  "completion": {"must_be_verified": true,"final_report":["implemented modules","files changed","database changes","environment variables","tests actually run","test results","build result","security review","real integrations","adapters/manual workflows","remaining limitations"]},
+  "absolute_rules": ["Do not fabricate data or APIs","Do not claim unexecuted tests/builds succeeded","Do not bypass security controls","Do not expose credentials","Do not silently overwrite verified student data","Do not let AI override deterministic eligibility","Do not let commission silently bias academic recommendations","Do not destroy existing OmniRoute functionality without inspection"]
+}
